@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,10 +24,10 @@ public class Guest extends User {
     @OneToMany(mappedBy = "guest", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
-    public Guest(String firstName, String lastName, String email, String password, List<Review> reviews, List<Booking> bookings) {
+    public Guest(String firstName, String lastName, String email, String password) {
         super(firstName, lastName, email, password);
-        this.reviews = reviews;
-        this.bookings = bookings;
+        this.reviews = new ArrayList<>();
+        this.bookings = new ArrayList<>();
     }
 
     public Guest() {}

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,9 +20,9 @@ public class Host extends User {
     @OneToMany(mappedBy = "host", fetch = FetchType.LAZY)
     private List<Property> properties;
 
-    public Host(String firstName, String lastName, String email, String password, List<Property> properties) {
+    public Host(String firstName, String lastName, String email, String password) {
         super(firstName, lastName, email, password);
-        this.properties = properties;
+        this.properties = new ArrayList<>();
     }
 
     public Host() {}

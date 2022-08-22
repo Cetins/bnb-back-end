@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -42,7 +43,7 @@ public class Property {
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
-            name = "scenes",
+            name = "property_scenes",
             joinColumns = { @JoinColumn(
                     name = "property_id",
                     nullable = false,
@@ -59,7 +60,7 @@ public class Property {
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
-            name = "facilities",
+            name = "property_facilities",
             joinColumns = { @JoinColumn(
                     name = "property_id",
                     nullable = false,
@@ -76,7 +77,7 @@ public class Property {
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
-            name = "amenities",
+            name = "property_amenities",
             joinColumns = { @JoinColumn(
                     name = "property_id",
                     nullable = false,
@@ -93,7 +94,7 @@ public class Property {
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
-            name = "parking_options",
+            name = "property_parking_options",
             joinColumns = { @JoinColumn(
                     name = "property_id",
                     nullable = false,
@@ -110,7 +111,7 @@ public class Property {
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
-            name = "property_rules",
+            name = "property_rules_list",
             joinColumns = { @JoinColumn(
                     name = "property_id",
                     nullable = false,
@@ -140,23 +141,23 @@ public class Property {
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
-    public Property(Host host, Boolean isActive, String type, Double rate, String location, List<ImageUrl> imageUrls, List<Scene> scenes, List<Facility> facilities, List<Amenity> amenities, List<Parking> parkingOptions, List<PropertyRule> propertyRules, String checkInAfter, String checkInBefore, String checkOutBefore, List<Review> reviews, List<Booking> bookings) {
+    public Property(Host host, Boolean isActive, String type, Double rate, String location, String checkInAfter, String checkInBefore, String checkOutBefore) {
         this.host = host;
         this.isActive = isActive;
         this.type = type;
         this.rate = rate;
         this.location = location;
-        this.imageUrls = imageUrls;
-        this.scenes = scenes;
-        this.facilities = facilities;
-        this.amenities = amenities;
-        this.parkingOptions = parkingOptions;
-        this.propertyRules = propertyRules;
+        this.imageUrls = new ArrayList<>();
+        this.scenes = new ArrayList<>();
+        this.facilities = new ArrayList<>();
+        this.amenities = new ArrayList<>();
+        this.parkingOptions = new ArrayList<>();
+        this.propertyRules = new ArrayList<>();
         this.checkInAfter = checkInAfter;
         this.checkInBefore = checkInBefore;
         this.checkOutBefore = checkOutBefore;
-        this.reviews = reviews;
-        this.bookings = bookings;
+        this.reviews = new ArrayList<>();
+        this.bookings = new ArrayList<>();
     }
 
     public Property() {
@@ -218,6 +219,8 @@ public class Property {
         this.imageUrls = imageUrls;
     }
 
+    public void addImageUrl(ImageUrl imageUrl) { this.imageUrls.add(imageUrl); }
+
     public List<Scene> getScenes() {
         return scenes;
     }
@@ -225,6 +228,8 @@ public class Property {
     public void setScenes(List<Scene> scenes) {
         this.scenes = scenes;
     }
+
+    public void addScene(Scene scene) { this.scenes.add(scene); }
 
     public List<Facility> getFacilities() {
         return facilities;
@@ -234,6 +239,8 @@ public class Property {
         this.facilities = facilities;
     }
 
+    public void addFacility(Facility facility) { this.facilities.add(facility); }
+
     public List<Amenity> getAmenities() {
         return amenities;
     }
@@ -241,6 +248,8 @@ public class Property {
     public void setAmenities(List<Amenity> amenities) {
         this.amenities = amenities;
     }
+
+    public void addAmenity(Amenity amenity) { this.amenities.add(amenity); }
 
     public List<Parking> getParkingOptions() {
         return parkingOptions;
@@ -250,6 +259,8 @@ public class Property {
         this.parkingOptions = parkingOptions;
     }
 
+    public void addParkingOption(Parking parking) { this.parkingOptions.add(parking); }
+
     public List<PropertyRule> getPropertyRules() {
         return propertyRules;
     }
@@ -257,6 +268,8 @@ public class Property {
     public void setPropertyRules(List<PropertyRule> propertyRules) {
         this.propertyRules = propertyRules;
     }
+
+    public void addPropertyRule(PropertyRule propertyRule) { this.propertyRules.add(propertyRule); }
 
     public String getCheckInAfter() {
         return checkInAfter;
@@ -290,6 +303,8 @@ public class Property {
         this.reviews = reviews;
     }
 
+    public void addReview(Review review) { this.reviews.add(review); }
+
     public List<Booking> getBookings() {
         return bookings;
     }
@@ -297,4 +312,6 @@ public class Property {
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
+
+    public void addBooking(Booking booking) { this.bookings.add(booking); }
 }

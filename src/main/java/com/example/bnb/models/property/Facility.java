@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class Facility {
     @JsonIgnoreProperties({"facilities"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
-            name = "properties",
+            name = "property_facilities",
             joinColumns = { @JoinColumn(
                     name = "facility_id",
                     nullable = false,
@@ -37,10 +38,10 @@ public class Facility {
             )})
     private List<Amenity> properties;
 
-    public Facility(String title, Boolean isShared, List<Amenity> properties) {
+    public Facility(String title, Boolean isShared) {
         this.title = title;
         this.isShared = isShared;
-        this.properties = properties;
+        this.properties = new ArrayList<>();
     }
 
     public Facility() {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class Parking {
     @JsonIgnoreProperties({"parking_options"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
-            name = "properties",
+            name = "property_parking_options",
             joinColumns = { @JoinColumn(
                     name = "parking_id",
                     nullable = false,
@@ -37,10 +38,10 @@ public class Parking {
             )})
     private List<Parking> properties;
 
-    public Parking(String title, Boolean isFree, List<Parking> properties) {
+    public Parking(String title, Boolean isFree) {
         this.title = title;
         this.isFree = isFree;
-        this.properties = properties;
+        this.properties = new ArrayList<>();
     }
 
     public Parking() {

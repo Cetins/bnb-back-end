@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class PropertyRule {
     @JsonIgnoreProperties({"property_rules"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
-            name = "properties",
+            name = "property_rules_list",
             joinColumns = { @JoinColumn(
                     name = "property_rule_id",
                     nullable = false,
@@ -37,10 +38,10 @@ public class PropertyRule {
             )})
     private List<PropertyRule> properties;
 
-    public PropertyRule(String title, Boolean isAllowed, List<PropertyRule> properties) {
+    public PropertyRule(String title, Boolean isAllowed) {
         this.title = title;
         this.isAllowed = isAllowed;
-        this.properties = properties;
+        this.properties = new ArrayList<>();
     }
 
     public PropertyRule() {

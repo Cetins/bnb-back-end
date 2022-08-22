@@ -29,4 +29,54 @@ public class Review {
     @JsonIgnoreProperties({"reviews"})
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
+
+    public Review(String text, Float rating, Guest guest, Property property) {
+        this.text = text;
+        this.rating = rating;
+        this.guest = guest;
+        this.property = property;
+    }
+
+    public Review() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
 }

@@ -24,4 +24,59 @@ public class Booking {
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
 
+    @Column(name = "date")
+    private String date;
+
+    @Column(name = "nights")
+    private Integer nights;
+
+    public Booking(Guest guest, Property property, String date, Integer nights) {
+        this.guest = guest;
+        this.property = property;
+        this.date = date;
+        this.nights = nights;
+    }
+
+    public Booking() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public Integer getNights() {
+        return nights;
+    }
+
+    public void setNights(Integer nights) {
+        this.nights = nights;
+    }
 }
