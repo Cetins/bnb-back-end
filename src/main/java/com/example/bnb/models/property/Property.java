@@ -1,5 +1,8 @@
 package com.example.bnb.models.property;
 
+import com.example.bnb.models.booking.Booking;
+import com.example.bnb.models.host.Host;
+import com.example.bnb.models.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
@@ -14,11 +17,19 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JsonIgnoreProperties({"properties"})
+    @JoinColumn(name = "host_id", nullable = false)
+    private Host host;
+
     @Column(name = "is_Active")
     private Boolean isActive;
 
     @Column(name = "type")
     private String type;
+
+    @Column(name = "rate")
+    private Double rate;
 
     @Column(name = "location")
     private String location;
@@ -42,7 +53,7 @@ public class Property {
                     nullable = false,
                     updatable = false
             )})
-    private List<Amenity> scenes;
+    private List<Scene> scenes;
 
     @ManyToMany
     @JsonIgnoreProperties({"properties"})
@@ -59,7 +70,7 @@ public class Property {
                     nullable = false,
                     updatable = false
             )})
-    private List<Amenity> facilities;
+    private List<Facility> facilities;
 
     @ManyToMany
     @JsonIgnoreProperties({"properties"})
@@ -121,9 +132,19 @@ public class Property {
     @Column(name = "check_out_before")
     private String checkOutBefore;
 
-    public Property(Boolean isActive, String type, String location, List<ImageUrl> imageUrls, List<Amenity> scenes, List<Amenity> facilities, List<Amenity> amenities, List<Parking> parkingOptions, List<PropertyRule> propertyRules, String checkInAfter, String checkInBefore, String checkOutBefore) {
+    @JsonIgnoreProperties({"property"})
+    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
+    private List<Review> reviews;
+
+    @JsonIgnoreProperties({"property"})
+    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
+    private List<Booking> bookings;
+
+    public Property(Host host, Boolean isActive, String type, Double rate, String location, List<ImageUrl> imageUrls, List<Scene> scenes, List<Facility> facilities, List<Amenity> amenities, List<Parking> parkingOptions, List<PropertyRule> propertyRules, String checkInAfter, String checkInBefore, String checkOutBefore, List<Review> reviews, List<Booking> bookings) {
+        this.host = host;
         this.isActive = isActive;
         this.type = type;
+        this.rate = rate;
         this.location = location;
         this.imageUrls = imageUrls;
         this.scenes = scenes;
@@ -134,6 +155,8 @@ public class Property {
         this.checkInAfter = checkInAfter;
         this.checkInBefore = checkInBefore;
         this.checkOutBefore = checkOutBefore;
+        this.reviews = reviews;
+        this.bookings = bookings;
     }
 
     public Property() {
@@ -145,6 +168,14 @@ public class Property {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Host getHost() {
+        return host;
+    }
+
+    public void setHost(Host host) {
+        this.host = host;
     }
 
     public Boolean getActive() {
@@ -163,6 +194,14 @@ public class Property {
         this.type = type;
     }
 
+    public Double getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -179,19 +218,19 @@ public class Property {
         this.imageUrls = imageUrls;
     }
 
-    public List<Amenity> getScenes() {
+    public List<Scene> getScenes() {
         return scenes;
     }
 
-    public void setScenes(List<Amenity> scenes) {
+    public void setScenes(List<Scene> scenes) {
         this.scenes = scenes;
     }
 
-    public List<Amenity> getFacilities() {
+    public List<Facility> getFacilities() {
         return facilities;
     }
 
-    public void setFacilities(List<Amenity> facilities) {
+    public void setFacilities(List<Facility> facilities) {
         this.facilities = facilities;
     }
 
@@ -241,5 +280,21 @@ public class Property {
 
     public void setCheckOutBefore(String checkOutBefore) {
         this.checkOutBefore = checkOutBefore;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }
