@@ -1,4 +1,4 @@
-package com.example.bnb.models.guest;
+package com.example.bnb.models.host;
 
 import com.example.bnb.models.User;
 
@@ -6,6 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "guests")
-public class Guest extends User {
+@Table(name = "hosts")
+public class Host extends User {
 }
