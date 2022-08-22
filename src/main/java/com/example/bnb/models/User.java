@@ -3,6 +3,7 @@ package com.example.bnb.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public abstract class User {
 
     @Id
