@@ -65,19 +65,6 @@ public class GuestController {
 //        return new ResponseEntity<>(guest, HttpStatus.OK);
 //    }
 
-//    @PutMapping("/guests/{id}")
-//    public Guest updateGuest(@PathVariable("id") Long id, @RequestBody Guest guest) throws Exception {
-//        Guest existingGuest = guestRepository.getReferenceById(id);
-//        if(existingGuest == null) {
-//            throw new Exception("Guest not found");
-//        }
-//        existingGuest.setFirstName(guest.getFirstName());
-//        existingGuest.setLastName(guest.getLastName());
-//        existingGuest.setEmail(guest.getEmail());
-//        existingGuest.setPassword(guest.getPassword());
-//        return guestRepository.save(existingGuest);
-//    }
-
     @PutMapping("/guests/{id}")
     Guest updateGuest(@RequestBody Guest newGuest, @PathVariable Long id) {
         return guestRepository.findById(id)
