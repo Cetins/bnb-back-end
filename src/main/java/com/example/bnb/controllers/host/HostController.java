@@ -28,4 +28,26 @@ public class HostController {
         hostRepository.save(host);
         return(HttpStatus.CREATED);
     }
+
+    @PutMapping("/hosts/{id}")
+    Host updateHost(@RequestBody Host newHost, @PathVariable Long id) {
+        return hostRepository.findById(id)
+                .map(host -> {
+                    host.setFirstName(newHost.getFirstName());
+                    host.setLastName(newHost.getLastName());
+                    host.setEmail(newHost.getEmail());
+                    host.setPassword(newHost.getPassword());
+                    return  hostRepository.save(host);
+                })
+                .orElseGet(() -> {
+                    newHost.setId(id);
+                    return  hostRepository.save(newHost);
+                });
+    }
+
+    @DeleteMapping("/hosts/{id}")
+    public ResponseEntity<Host> deleteHost(@PathVariable Long id) {
+        hostRepository.deleteById(id);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 }
