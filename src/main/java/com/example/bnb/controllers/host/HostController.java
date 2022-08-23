@@ -13,7 +13,7 @@ public class HostController {
     @Autowired
     HostRepository hostRepository;
 
-    @GetMapping("hosts")
+    @GetMapping("/hosts")
     public ResponseEntity getAllHosts() {
         return new ResponseEntity<>(hostRepository.findAll(), HttpStatus.OK);
     }
@@ -24,8 +24,8 @@ public class HostController {
     }
 
     @PostMapping("/hosts")
-    public ResponseEntity<Host> postHost(@RequestBody Host host) {
+    public HttpStatus postHost(@RequestBody Host host) {
         hostRepository.save(host);
-        return new ResponseEntity<>(host, HttpStatus.CREATED);
+        return(HttpStatus.CREATED);
     }
 }
