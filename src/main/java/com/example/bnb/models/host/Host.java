@@ -3,6 +3,7 @@ package com.example.bnb.models.host;
 import com.example.bnb.models.User;
 import com.example.bnb.models.property.ImageUrl;
 import com.example.bnb.models.property.Property;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import java.util.List;
 @Table(name = "hosts")
 public class Host extends User {
 
+//    @JsonBackReference(value = "host")
     @JsonIgnoreProperties({"host"})
     @OneToMany(mappedBy = "host", fetch = FetchType.LAZY)
     private List<Property> properties;

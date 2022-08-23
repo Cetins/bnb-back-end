@@ -2,6 +2,7 @@ package com.example.bnb.models.booking;
 
 import com.example.bnb.models.guest.Guest;
 import com.example.bnb.models.property.Property;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -15,12 +16,14 @@ public class Booking {
     private Long id;
 
     @ManyToOne
-    @JsonIgnoreProperties({"bookings"})
+    @JsonBackReference(value = "bookingGuest")
+//    @JsonIgnoreProperties({"bookings", "id", "password"})
     @JoinColumn(name = "guest_id", nullable = false)
     private Guest guest;
 
     @ManyToOne
-    @JsonIgnoreProperties({"bookings"})
+    @JsonBackReference(value = "bookingProperty")
+//    @JsonIgnoreProperties({"bookings", "id", "rate", "imageUrls", "scenes", "facilities", "amenities", "parkingOptions", "propertyRules", "reviews", "active"})
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
 

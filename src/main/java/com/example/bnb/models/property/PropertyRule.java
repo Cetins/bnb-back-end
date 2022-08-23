@@ -1,5 +1,6 @@
 package com.example.bnb.models.property;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
@@ -22,7 +23,8 @@ public class PropertyRule {
     private Boolean isAllowed;
 
     @ManyToMany
-    @JsonIgnoreProperties({"property_rules"})
+//    @JsonBackReference(value = "propertyRules")
+    @JsonIgnoreProperties({"propertyRules"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "property_rules_list",

@@ -3,6 +3,7 @@ package com.example.bnb.models.property;
 import com.example.bnb.models.booking.Booking;
 import com.example.bnb.models.host.Host;
 import com.example.bnb.models.review.Review;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
@@ -19,7 +20,8 @@ public class Property {
     private Long id;
 
     @ManyToOne
-    @JsonIgnoreProperties({"properties"})
+//    @JsonBackReference(value = "properties2")
+    @JsonIgnoreProperties({"id", "email", "password", "properties"})
     @JoinColumn(name = "host_id", nullable = false)
     private Host host;
 
@@ -35,11 +37,13 @@ public class Property {
     @Column(name = "location")
     private String location;
 
+//    @JsonBackReference(value = "properties3")
     @JsonIgnoreProperties({"property"})
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<ImageUrl> imageUrls;
 
     @ManyToMany
+//    @JsonBackReference(value = "properties4")
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
@@ -57,6 +61,7 @@ public class Property {
     private List<Scene> scenes;
 
     @ManyToMany
+//    @JsonBackReference(value = "properties5")
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
@@ -74,6 +79,7 @@ public class Property {
     private List<Facility> facilities;
 
     @ManyToMany
+//    @JsonBackReference(value = "properties6")
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
@@ -91,6 +97,7 @@ public class Property {
     private List<Amenity> amenities;
 
     @ManyToMany
+//    @JsonBackReference(value = "properties7")
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
@@ -108,6 +115,7 @@ public class Property {
     private List<Parking> parkingOptions;
 
     @ManyToMany
+//    @JsonBackReference(value = "properties8")
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
@@ -137,6 +145,7 @@ public class Property {
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<Review> reviews;
 
+//    @JsonBackReference(value = "propertyBookings")
     @JsonIgnoreProperties({"property"})
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<Booking> bookings;

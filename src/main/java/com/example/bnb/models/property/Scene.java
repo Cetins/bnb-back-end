@@ -1,5 +1,6 @@
 package com.example.bnb.models.property;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
@@ -19,6 +20,7 @@ public class Scene {
     private String title;
 
     @ManyToMany
+//    @JsonBackReference(value = "scenes")
     @JsonIgnoreProperties({"scenes"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(

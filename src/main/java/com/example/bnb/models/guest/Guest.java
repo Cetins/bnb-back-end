@@ -3,6 +3,7 @@ package com.example.bnb.models.guest;
 import com.example.bnb.models.User;
 import com.example.bnb.models.booking.Booking;
 import com.example.bnb.models.review.Review;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
@@ -16,11 +17,13 @@ import java.util.List;
 @Table(name = "guests")
 public class Guest extends User {
 
-    @JsonIgnoreProperties({"guest"})
+    @JsonBackReference(value = "guestReviews")
+//    @JsonIgnoreProperties({"guest"})
     @OneToMany(mappedBy = "guest", fetch = FetchType.LAZY)
     private List<Review> reviews;
 
-    @JsonIgnoreProperties({"guest"})
+    @JsonBackReference(value = "guestBookings")
+//    @JsonIgnoreProperties({"guest"})
     @OneToMany(mappedBy = "guest", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 

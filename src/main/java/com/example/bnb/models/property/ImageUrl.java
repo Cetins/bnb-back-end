@@ -1,5 +1,6 @@
 package com.example.bnb.models.property;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class ImageUrl {
     private String url;
 
     @ManyToOne
+//    @JsonBackReference(value = "imageUrls")
     @JsonIgnoreProperties({"imageUrls"})
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
