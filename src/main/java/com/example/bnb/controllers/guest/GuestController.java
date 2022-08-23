@@ -3,13 +3,16 @@ package com.example.bnb.controllers.guest;
 import com.example.bnb.models.guest.Guest;
 import com.example.bnb.repositories.guest.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @RestController
 public class GuestController {
@@ -28,28 +31,72 @@ public class GuestController {
     }
 
     @PostMapping(value = "/guests")
-    public ResponseEntity<Guest> postGuest(@RequestBody Guest guest) {
+    public HttpStatus postGuest(@RequestBody Guest guest) {
         guestRepository.save(guest);
-        return new ResponseEntity<>(guest, HttpStatus.CREATED);
+        return (HttpStatus.CREATED);
     }
 
-
-//    @ApiOperation(value = "add product", response = Iterable.class)
-//    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully added product") })
-//    @PostMapping("/addProduct")
-//    public void addProduct(@RequestPart(value = "images")       @ApiParam(value = "images")  MultipartFile[] images,
-//                           @RequestPart(value = "productName")  @ApiParam(value = "productName")  String productName,
-//                           @RequestPart(value = "description")  @ApiParam(value = "description")  String description,
-//                           @RequestPart(value = "realPrice")    @ApiParam(value = "realPrice")    String realPrice,
-//                           @RequestPart(value = "category")     @ApiParam(value = "category")     String category,
-//                           @RequestPart(value = "creator")      @ApiParam(value = "creator")      String creator,
-//                           @RequestPart(value = "tradeReference") @ApiParam(value = "tradeReference") String tradeReference
-//    ) throws Exception {
-//
-//        Product p = createProduct(productName, description, Double.valueOf(realPrice), category, creator, tradeReference);
-//        Arrays.asList(images)
-//                .stream()
-//                .forEach(image -> uploadImages(image, p));
-//        traderServices.addProduct(p);
+//    @PatchMapping("/guests/{id}")
+//    public ResponseEntity<?> patchGuest(
+//            @RequestBody Guest guest,
+//            @PathVariable("id") Long id) {
+//        guestRepository.save(guest);
+//        return ResponseEntity.ok("resource saved");
 //    }
+
+//    @PatchMapping("/guests/{id}")
+//    public ResponseEntity<Guest> updateGuestPartially(
+//            @PathVariable(value = "id") Long id,
+//            @Validated @RequestBody Guest guestDetails) throws ResourceNotFoundException {
+//        Guest guest = guestRepository.findById(id)
+//                .orElseThrow(() -> new ResourceNotFoundException("User not found on :: "+ id));
+//
+//        guest.setFirstName(guestDetails.getFirstName());
+//        guest.setLastName(guestDetails.getLastName());
+//        guest.setEmail(guestDetails.getEmail());
+//        guest.setPassword(guestDetails.getPassword());
+//        final Guest updatedGuest = guestRepository.save(guest);
+//        return ResponseEntity.ok(updatedGuest);
+//    }
+
+//    @PatchMapping(value = "/guests/{id}")
+//    public ResponseEntity<Guest> patchGuest(@RequestBody Guest guest, @PathVariable Long id) {
+//        guestRepository.save(guest);
+//        return new ResponseEntity<>(guest, HttpStatus.OK);
+//    }
+
+//    @PutMapping("/guests/{id}")
+//    public Guest updateGuest(@PathVariable("id") Long id, @RequestBody Guest guest) throws Exception {
+//        Guest existingGuest = guestRepository.getReferenceById(id);
+//        if(existingGuest == null) {
+//            throw new Exception("Guest not found");
+//        }
+//        existingGuest.setFirstName(guest.getFirstName());
+//        existingGuest.setLastName(guest.getLastName());
+//        existingGuest.setEmail(guest.getEmail());
+//        existingGuest.setPassword(guest.getPassword());
+//        return guestRepository.save(existingGuest);
+//    }
+
+    @PutMapping("/guests/{id}")
+    Guest updateGuest(@RequestBody Guest newGuest, @PathVariable Long id) {
+        return guestRepository.findById(id)
+                .map(guest -> {
+                    guest.setFirstName(newGuest.getFirstName());
+                    guest.setLastName(newGuest.getLastName());
+                    guest.setEmail(newGuest.getEmail());
+                    guest.setPassword(newGuest.getPassword());
+                    return guestRepository.save(guest);
+                })
+                .orElseGet(() -> {
+                    newGuest.setId(id);
+                    return  guestRepository.save(newGuest);
+                });
+    }
+
+    @DeleteMapping("/guests/{id}")
+    public ResponseEntity<Guest> deleteGuest(@PathVariable Long id) {
+        guestRepository.deleteById(id);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 }
