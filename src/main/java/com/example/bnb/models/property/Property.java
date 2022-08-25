@@ -43,6 +43,9 @@ public class Property {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "coverImage")
+    private String coverImage;
+
 //    @JsonBackReference(value = "properties3")
     @JsonIgnoreProperties({"property"})
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
@@ -165,6 +168,7 @@ public class Property {
         this.location = location;
         this.description = description;
         this.imageUrls = new ArrayList<>();
+        this.coverImage = new String();
         this.scenes = new ArrayList<>();
         this.facilities = new ArrayList<>();
         this.amenities = new ArrayList<>();
@@ -237,6 +241,14 @@ public class Property {
     }
 
     public void addImageUrl(ImageUrl imageUrl) { this.imageUrls.add(imageUrl); }
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
 
     public List<Scene> getScenes() {
         return scenes;
