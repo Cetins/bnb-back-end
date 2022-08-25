@@ -331,49 +331,73 @@ public class DataLoader implements ApplicationRunner {
                 imageUrlRepository.save(url1);
 
                 ImageUrl url2 = new ImageUrl("img2",property1);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url2);
 
                 ImageUrl url3 = new ImageUrl("img3",property1);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url3);
 
                 ImageUrl url4 = new ImageUrl("img4",property1);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url4);
 
                 ImageUrl url5 = new ImageUrl("img5",property1);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url5);
 
                 ImageUrl url6 = new ImageUrl("img6",property2);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url6);
 
                 ImageUrl url7 = new ImageUrl("img7",property2);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url7);
 
                 ImageUrl url8 = new ImageUrl("img8",property2);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url8);
 
                 ImageUrl url9 = new ImageUrl("img9",property2);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url9);
 
                 ImageUrl url10 = new ImageUrl("img10",property2);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url10);
 
                 ImageUrl url11 = new ImageUrl("img11",property3);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url11);
 
                 ImageUrl url12 = new ImageUrl("img12",property3);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url12);
 
                 ImageUrl url13 = new ImageUrl("img13",property3);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url13);
 
                 ImageUrl url14 = new ImageUrl("img14",property3);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url14);
 
                 ImageUrl url15 = new ImageUrl("img15",property3);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url15);
 
                 ImageUrl url16 = new ImageUrl("img16",property4);
-                imageUrlRepository.save(url1);
+                imageUrlRepository.save(url16);
+
+                ImageUrl url17 = new ImageUrl("img16",property4);
+                imageUrlRepository.save(url17);
+
+                ImageUrl url18 = new ImageUrl("img16",property4);
+                imageUrlRepository.save(url18);
+
+                ImageUrl url19 = new ImageUrl("img16",property4);
+                imageUrlRepository.save(url19);
+
+                ImageUrl url20 = new ImageUrl("img16",property4);
+                imageUrlRepository.save(url20);
+
+                property1.setCoverImage(url1.getUrl());
+                propertyRepository.save(property1);
+
+                property2.setCoverImage(url6.getUrl());
+                propertyRepository.save(property2);
+
+                property3.setCoverImage(url10.getUrl());
+                propertyRepository.save(property3);
+
+                property4.setCoverImage(url15.getUrl());
+                propertyRepository.save(property4);
 
                 //  Bookings
 
