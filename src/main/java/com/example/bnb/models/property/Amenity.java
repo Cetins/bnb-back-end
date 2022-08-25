@@ -22,9 +22,6 @@ public class Amenity {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "icon_url") // Google Icons
-    private String iconUrl;
-
     @ManyToMany
 //    @JsonBackReference(value = "amenities")
     @JsonIgnoreProperties({"amenities"})
@@ -43,10 +40,9 @@ public class Amenity {
             )})
     private List<Amenity> properties;
 
-    public Amenity(String category, String title, String iconUrl) {
+    public Amenity(String category, String title) {
         this.category = category;
         this.title = title;
-        this.iconUrl = iconUrl;
         this.properties = new ArrayList<>();
     }
 
@@ -75,14 +71,6 @@ public class Amenity {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getIconUrl() {
-        return iconUrl;
-    }
-
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl;
     }
 
     public List<Amenity> getProperties() {
