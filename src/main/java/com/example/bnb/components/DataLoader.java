@@ -63,7 +63,7 @@ public class DataLoader implements ApplicationRunner {
         Host testHost1 = new Host("Jarrod", "Bennie", "jarrod@mail.com", "789");
         hostRepository.save(testHost1);
 
-        Property testProperty = new Property(testHost1, true, "house", 95D, "edinburgh", "12-00", "21-00", "10-00");
+        Property testProperty = new Property(testHost1, true, "house", 3, 95D, "edinburgh", "beautiful house with scene", "12-00", "21-00", "10-00");
         propertyRepository.save(testProperty);
 
         Amenity testTowel = new Amenity("bathroom", "towel", "http://test-img-url-1");

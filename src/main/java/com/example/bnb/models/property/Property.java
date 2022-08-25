@@ -31,11 +31,17 @@ public class Property {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "bedCount")
+    private Integer bedCount;
+
     @Column(name = "rate")
     private Double rate;
 
     @Column(name = "location")
     private String location;
+
+    @Column(name = "description")
+    private String description;
 
 //    @JsonBackReference(value = "properties3")
     @JsonIgnoreProperties({"property"})
@@ -150,12 +156,14 @@ public class Property {
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
-    public Property(Host host, Boolean isActive, String type, Double rate, String location, String checkInAfter, String checkInBefore, String checkOutBefore) {
+    public Property(Host host, Boolean isActive, String type, Integer bedCount, Double rate, String location, String description, String checkInAfter, String checkInBefore, String checkOutBefore) {
         this.host = host;
         this.isActive = isActive;
         this.type = type;
+        this.bedCount = bedCount;
         this.rate = rate;
         this.location = location;
+        this.description = description;
         this.imageUrls = new ArrayList<>();
         this.scenes = new ArrayList<>();
         this.facilities = new ArrayList<>();
