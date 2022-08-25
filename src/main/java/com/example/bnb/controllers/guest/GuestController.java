@@ -5,14 +5,8 @@ import com.example.bnb.repositories.guest.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Arrays;
-import java.util.Optional;
 
 @RestController
 public class GuestController {
@@ -35,48 +29,6 @@ public class GuestController {
         guestRepository.save(guest);
         return (HttpStatus.CREATED);
     }
-
-//    @PatchMapping("/guests/{id}")
-//    public ResponseEntity<?> patchGuest(
-//            @RequestBody Guest guest,
-//            @PathVariable("id") Long id) {
-//        guestRepository.save(guest);
-//        return ResponseEntity.ok("resource saved");
-//    }
-
-//    @PatchMapping("/guests/{id}")
-//    public ResponseEntity<Guest> updateGuestPartially(
-//            @PathVariable(value = "id") Long id,
-//            @Validated @RequestBody Guest guestDetails) throws ResourceNotFoundException {
-//        Guest guest = guestRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("User not found on :: "+ id));
-//
-//        guest.setFirstName(guestDetails.getFirstName());
-//        guest.setLastName(guestDetails.getLastName());
-//        guest.setEmail(guestDetails.getEmail());
-//        guest.setPassword(guestDetails.getPassword());
-//        final Guest updatedGuest = guestRepository.save(guest);
-//        return ResponseEntity.ok(updatedGuest);
-//    }
-
-//    @PatchMapping(value = "/guests/{id}")
-//    public ResponseEntity<Guest> patchGuest(@RequestBody Guest guest, @PathVariable Long id) {
-//        guestRepository.save(guest);
-//        return new ResponseEntity<>(guest, HttpStatus.OK);
-//    }
-
-//    @PutMapping("/guests/{id}")
-//    public Guest updateGuest(@PathVariable("id") Long id, @RequestBody Guest guest) throws Exception {
-//        Guest existingGuest = guestRepository.getReferenceById(id);
-//        if(existingGuest == null) {
-//            throw new Exception("Guest not found");
-//        }
-//        existingGuest.setFirstName(guest.getFirstName());
-//        existingGuest.setLastName(guest.getLastName());
-//        existingGuest.setEmail(guest.getEmail());
-//        existingGuest.setPassword(guest.getPassword());
-//        return guestRepository.save(existingGuest);
-//    }
 
     @PutMapping("/guests/{id}")
     Guest updateGuest(@RequestBody Guest newGuest, @PathVariable Long id) {

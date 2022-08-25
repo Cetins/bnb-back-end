@@ -31,11 +31,20 @@ public class Property {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "bedCount")
+    private Integer bedCount;
+
     @Column(name = "rate")
     private Double rate;
 
     @Column(name = "location")
     private String location;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "coverImage")
+    private String coverImage;
 
 //    @JsonBackReference(value = "properties3")
     @JsonIgnoreProperties({"property"})
@@ -150,13 +159,16 @@ public class Property {
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
-    public Property(Host host, Boolean isActive, String type, Double rate, String location, String checkInAfter, String checkInBefore, String checkOutBefore) {
+    public Property(Host host, Boolean isActive, String type, Integer bedCount, Double rate, String location, String description, String checkInAfter, String checkInBefore, String checkOutBefore) {
         this.host = host;
         this.isActive = isActive;
         this.type = type;
+        this.bedCount = bedCount;
         this.rate = rate;
         this.location = location;
+        this.description = description;
         this.imageUrls = new ArrayList<>();
+        this.coverImage = new String();
         this.scenes = new ArrayList<>();
         this.facilities = new ArrayList<>();
         this.amenities = new ArrayList<>();
@@ -229,6 +241,14 @@ public class Property {
     }
 
     public void addImageUrl(ImageUrl imageUrl) { this.imageUrls.add(imageUrl); }
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
 
     public List<Scene> getScenes() {
         return scenes;
@@ -323,4 +343,20 @@ public class Property {
     }
 
     public void addBooking(Booking booking) { this.bookings.add(booking); }
+
+    public Integer getBedCount() {
+        return bedCount;
+    }
+
+    public void setBedCount(Integer bedCount) {
+        this.bedCount = bedCount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

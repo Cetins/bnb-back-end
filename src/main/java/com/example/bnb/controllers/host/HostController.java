@@ -13,7 +13,7 @@ public class HostController {
     @Autowired
     HostRepository hostRepository;
 
-    @GetMapping("hosts")
+    @GetMapping("/hosts")
     public ResponseEntity getAllHosts() {
         return new ResponseEntity<>(hostRepository.findAll(), HttpStatus.OK);
     }
@@ -24,8 +24,30 @@ public class HostController {
     }
 
     @PostMapping("/hosts")
-    public ResponseEntity<Host> postHost(@RequestBody Host host) {
+    public HttpStatus postHost(@RequestBody Host host) {
         hostRepository.save(host);
-        return new ResponseEntity<>(host, HttpStatus.CREATED);
+        return(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/hosts/{id}")
+    Host updateHost(@RequestBody Host newHost, @PathVariable Long id) {
+        return hostRepository.findById(id)
+                .map(host -> {
+                    host.setFirstName(newHost.getFirstName());
+                    host.setLastName(newHost.getLastName());
+                    host.setEmail(newHost.getEmail());
+                    host.setPassword(newHost.getPassword());
+                    return  hostRepository.save(host);
+                })
+                .orElseGet(() -> {
+                    newHost.setId(id);
+                    return  hostRepository.save(newHost);
+                });
+    }
+
+    @DeleteMapping("/hosts/{id}")
+    public ResponseEntity<Host> deleteHost(@PathVariable Long id) {
+        hostRepository.deleteById(id);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }
