@@ -331,4 +331,20 @@ public class Property {
     }
 
     public void addBooking(Booking booking) { this.bookings.add(booking); }
+
+    public Integer getBedCount() {
+        return bedCount;
+    }
+
+    public void setBedCount(Integer bedCount) {
+        this.bedCount = bedCount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
