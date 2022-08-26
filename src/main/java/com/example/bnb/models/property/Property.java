@@ -40,7 +40,7 @@ public class Property {
     @Column(name = "location")
     private String location;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "coverImage")

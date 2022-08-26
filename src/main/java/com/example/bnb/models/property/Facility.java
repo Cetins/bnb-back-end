@@ -22,6 +22,9 @@ public class Facility {
     @Column(name = "is_shared")
     private Boolean isShared;
 
+    @Column(name = "icon_url") // Google Icons
+    private String iconUrl;
+
     @ManyToMany
 //    @JsonBackReference(value = "facilities")
     @JsonIgnoreProperties({"facilities"})
@@ -40,9 +43,10 @@ public class Facility {
             )})
     private List<Amenity> properties;
 
-    public Facility(String title, Boolean isShared) {
+    public Facility(String title, Boolean isShared, String iconUrl) {
         this.title = title;
         this.isShared = isShared;
+        this.iconUrl = iconUrl;
         this.properties = new ArrayList<>();
     }
 
@@ -71,6 +75,14 @@ public class Facility {
 
     public void setShared(Boolean shared) {
         isShared = shared;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     public List<Amenity> getProperties() {

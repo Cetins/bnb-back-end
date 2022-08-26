@@ -3,7 +3,6 @@ package com.example.bnb.controllers.guest;
 import com.example.bnb.models.guest.Guest;
 import com.example.bnb.repositories.guest.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +30,7 @@ public class GuestController {
     }
 
     @PutMapping("/guests/{id}")
-    Guest updateGuest(@RequestBody Guest newGuest, @PathVariable Long id) {
+    public Guest updateGuest(@RequestBody Guest newGuest, @PathVariable Long id) {
         return guestRepository.findById(id)
                 .map(guest -> {
                     guest.setFirstName(newGuest.getFirstName());

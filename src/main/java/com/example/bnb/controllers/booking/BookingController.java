@@ -30,4 +30,27 @@ public class BookingController {
         bookingRepository.save(booking);
         return new ResponseEntity<>(booking, HttpStatus.CREATED);
     }
+
+    @PutMapping("/bookings/{id}")
+    public Booking updateBooking(@RequestBody Booking newBooking, @PathVariable Long id) {
+        return bookingRepository.findById(id)
+                .map(booking -> {
+                    booking.setGuest(newBooking.getGuest());
+                    booking.setProperty(newBooking.getProperty());
+                    booking.setDate(newBooking.getDate());
+                    booking.setNights(newBooking.getNights());
+                    booking.setPeople(newBooking.getPeople());
+                    return bookingRepository.save(booking);
+                })
+                .orElseGet(() -> {
+                    newBooking.setId(id);
+                    return bookingRepository.save(newBooking);
+                });
+    }
+
+    @DeleteMapping("/bookings/{id}")
+    public ResponseEntity<Booking> deleteBooking(@PathVariable Long id) {
+        bookingRepository.deleteById(id);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 }
