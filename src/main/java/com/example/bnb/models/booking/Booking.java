@@ -33,11 +33,15 @@ public class Booking {
     @Column(name = "nights")
     private Integer nights;
 
-    public Booking(Guest guest, Property property, String date, Integer nights) {
+    @Column(name = "people")
+    private Integer people;
+
+    public Booking(Guest guest, Property property, String date, Integer nights, Integer people) {
         this.guest = guest;
         this.property = property;
         this.date = date;
         this.nights = nights;
+        this.people = people;
     }
 
     public Booking() {
@@ -81,5 +85,13 @@ public class Booking {
 
     public void setNights(Integer nights) {
         this.nights = nights;
+    }
+
+    public Integer getPeople() {
+        return people;
+    }
+
+    public void setPeople(Integer people) {
+        this.people = people;
     }
 }

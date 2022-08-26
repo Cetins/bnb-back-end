@@ -75,16 +75,16 @@ public class DataLoader implements ApplicationRunner {
 
                 //  Properties
 
-                Property property1 = new Property(jarrod, true, "flat", 1, 95D, "edinburgh","lorem ipsum", "12-00", "21-00", "10-00");
+                Property property1 = new Property(jarrod, true, "flat", 1, 95D, "edinburgh","Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit. Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12-00", "21-00", "10-00");
                 propertyRepository.save(property1);
 
-                Property property2 = new Property(stan, true, "room", 1, 85D, "london", "lorem ipsum", "12-00", "21-00", "10-00");
+                Property property2 = new Property(stan, true, "room", 1, 85D, "london", "Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12-00", "21-00", "10-00");
                 propertyRepository.save(property2);
 
-                Property property3 = new Property(john, true, "house", 3,  230D, "glasgow", "lorem ipsum", "12-00", "21-00", "10-00");
+                Property property3 = new Property(john, true, "house", 3,  230D, "glasgow", "Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12-00", "21-00", "10-00");
                 propertyRepository.save(property3);
 
-                Property property4 = new Property(john, true, "house", 2, 120D, "glasgow", "lorem ipsum", "12-00", "21-00", "10-00");
+                Property property4 = new Property(john, true, "house", 2, 120D, "glasgow", "Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12-00", "21-00", "10-00");
                 propertyRepository.save(property4);
 
                 //  Amenities
@@ -401,10 +401,10 @@ public class DataLoader implements ApplicationRunner {
 
                 //  Bookings
 
-                Booking testBooking1 = new Booking(sushi, property1, "20-09-22", 7);
+                Booking testBooking1 = new Booking(sushi, property1, "20-09-22", 7, 2);
                 bookingRepository.save(testBooking1);
 
-                Booking testBooking2 = new Booking(sushi, property3, "25-10-22", 3);
+                Booking testBooking2 = new Booking(sushi, property3, "25-10-22", 3, 2);
                 bookingRepository.save(testBooking2);
 
                 //  Reviews
