@@ -26,8 +26,8 @@ public class Facility {
     private String iconUrl;
 
     @ManyToMany
-//    @JsonBackReference(value = "facilities")
-    @JsonIgnoreProperties({"facilities"})
+    @JsonBackReference(value = "facilities")
+//    @JsonIgnoreProperties({"facilities"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "property_facilities",

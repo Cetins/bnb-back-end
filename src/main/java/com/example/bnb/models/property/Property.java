@@ -124,7 +124,7 @@ public class Property {
     private List<Parking> parkingOptions;
 
     @ManyToMany
-//    @JsonBackReference(value = "properties8")
+//    @JsonBackReference(value = "properties")
     @JsonIgnoreProperties({"properties"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
@@ -159,12 +159,17 @@ public class Property {
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
+    @Column(name = "rating")
+    private Float rating;
+
+
     public Property(Host host, Boolean isActive, String type, Integer bedCount, Double rate, String location, String description, String checkInAfter, String checkInBefore, String checkOutBefore) {
         this.host = host;
         this.isActive = isActive;
         this.type = type;
         this.bedCount = bedCount;
         this.rate = rate;
+        this.rating = null;
         this.location = location;
         this.description = description;
         this.imageUrls = new ArrayList<>();
@@ -358,5 +363,19 @@ public class Property {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Float getRating() {
+        Float totalRating = 0F;
+        for (Review review :
+            this.getReviews()) {
+            totalRating += review.getRating();
+        }
+        this.setRating(totalRating / this.reviews.size());
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
     }
 }
