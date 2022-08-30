@@ -14,13 +14,19 @@ public class GuestController {
     GuestRepository guestRepository;
 
     @GetMapping("/guests")
-    public ResponseEntity getAllGuests() {
-        return new ResponseEntity<>(guestRepository.findAll(), HttpStatus.OK);
-    }
+    public ResponseEntity<Guest> getAllGuestsAndFilters(
+            @RequestParam(required = false, name = "email") String email,
+            @RequestParam(required = false, name = "id") Long id
+    ) {
+        if (id != null) {
+            return new ResponseEntity(guestRepository.findById(id), HttpStatus.OK);
+        }
 
-    @GetMapping("/guests/{id}")
-    public ResponseEntity getGuest(@PathVariable Long id) {
-        return new ResponseEntity<>(guestRepository.findById(id), HttpStatus.OK);
+        if (email != null) {
+            return new ResponseEntity(guestRepository.findByEmail(email), HttpStatus.OK);
+        }
+
+        return new ResponseEntity(guestRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/guests")

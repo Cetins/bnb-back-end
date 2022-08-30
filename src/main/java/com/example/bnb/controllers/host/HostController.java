@@ -14,13 +14,19 @@ public class HostController {
     HostRepository hostRepository;
 
     @GetMapping("/hosts")
-    public ResponseEntity getAllHosts() {
-        return new ResponseEntity<>(hostRepository.findAll(), HttpStatus.OK);
-    }
+    public ResponseEntity<Host> getAllHostsAndFilters(
+            @RequestParam(required = false, name = "id") Long id,
+            @RequestParam(required = false, name = "email") String email
+    ) {
+        if (id != null) {
+            return new ResponseEntity(hostRepository.findById(id), HttpStatus.OK);
+        }
 
-    @GetMapping("hosts/{id}")
-    public ResponseEntity getHost(@PathVariable Long id) {
-        return new ResponseEntity<>(hostRepository.findById(id), HttpStatus.OK);
+        if (email != null) {
+            return new ResponseEntity(hostRepository.findByEmail(email), HttpStatus.OK);
+        }
+
+        return new ResponseEntity(hostRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/hosts")
