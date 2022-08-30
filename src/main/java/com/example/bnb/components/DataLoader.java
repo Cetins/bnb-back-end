@@ -75,16 +75,16 @@ public class DataLoader implements ApplicationRunner {
 
                 //  Properties
 
-                Property property1 = new Property(jarrod, true, "flat", 1, 95D, "edinburgh","Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit. Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12-00", "21-00", "10-00");
+                Property property1 = new Property(jarrod, true, "Flat", 1, 95D, "Edinburgh","Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit. Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12:00", "21:00", "10:00");
                 propertyRepository.save(property1);
 
-                Property property2 = new Property(stan, true, "room", 1, 85D, "london", "Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12-00", "21-00", "10-00");
+                Property property2 = new Property(stan, true, "Room", 1, 85D, "London", "Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12:00", "21:00", "10:00");
                 propertyRepository.save(property2);
 
-                Property property3 = new Property(john, true, "house", 3,  230D, "glasgow", "Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12-00", "21-00", "10-00");
+                Property property3 = new Property(john, true, "House", 3,  230D, "Glasgow", "Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12:00", "21:00", "10:00");
                 propertyRepository.save(property3);
 
-                Property property4 = new Property(john, true, "house", 2, 120D, "glasgow", "Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12-00", "21-00", "10-00");
+                Property property4 = new Property(john, true, "House", 2, 120D, "Glasgow", "Lorem ipsum dolor sit amet. Nam nihil repellat et dolorum veniam sed iste modi ad dolore pariatur vel laborum tenetur. A dicta perferendis ea blanditiis maxime aut molestiae voluptatum aut dignissimos reprehenderit", "12:00", "21:00", "10:00");
                 propertyRepository.save(property4);
 
                 //  Amenities
@@ -192,16 +192,16 @@ public class DataLoader implements ApplicationRunner {
                 ArrayList<Amenity> amenities2 = new ArrayList<>(Arrays.asList(cleaningProducts, dryer, washingMachine, towels, hangers, tv, airConditioner, oven, kitchenEssentials, microwave, coffeeMaker, smokeAlarm, wifi, workSpace));
 
                 property1.setAmenities(amenities1);
-                propertyRepository.save(property1);
+//                propertyRepository.save(property1);
 
                 property2.setAmenities(amenities2);
-                propertyRepository.save(property2);
+//                propertyRepository.save(property2);
 
                 property3.setAmenities(amenities1);
-                propertyRepository.save(property3);
+//                propertyRepository.save(property3);
 
                 property4.setAmenities(amenities2);
-                propertyRepository.save(property4);
+//                propertyRepository.save(property4);
 
                 //  Facilities
 
@@ -217,23 +217,23 @@ public class DataLoader implements ApplicationRunner {
                 Facility hotTub = new Facility("Hot tub", false, "hot_tub");
                 facilityRepository.save(hotTub);
 
-                Facility balcony = new Facility("balcony", false, "balcony");
+                Facility balcony = new Facility("Balcony", false, "balcony");
                 facilityRepository.save(balcony);
 
                 property1.addFacility(garden);
                 property1.addFacility(hotTub);
-                propertyRepository.save(property1);
+//                propertyRepository.save(property1);
 
                 property2.addFacility(garden);
                 property2.addFacility(balcony);
-                propertyRepository.save(property2);
+//                propertyRepository.save(property2);
 
                 property3.addFacility(garden);
                 property3.addFacility(outdoorPool);
-                propertyRepository.save(property3);
+//                propertyRepository.save(property3);
 
                 property4.addFacility(balcony);
-                propertyRepository.save(property4);
+//                propertyRepository.save(property4);
 
 
                 //  Parking
@@ -251,17 +251,17 @@ public class DataLoader implements ApplicationRunner {
                 parkingRepository.save(reserved);
 
                 property1.addParkingOption(offStreet);
-                propertyRepository.save(property1);
+//                propertyRepository.save(property1);
 
                 property2.addParkingOption(offStreet);
-                propertyRepository.save(property2);
+//                propertyRepository.save(property2);
 
                 property3.addParkingOption(driveway);
                 property3.addParkingOption(garage);
-                propertyRepository.save(property3);
+//                propertyRepository.save(property3);
 
                 property3.addParkingOption(reserved);
-                propertyRepository.save(property4);
+//                propertyRepository.save(property4);
 
                 //  Rules
 
@@ -276,17 +276,17 @@ public class DataLoader implements ApplicationRunner {
 
                 property1.addPropertyRule(smoking);
                 property1.addPropertyRule(party);
-                propertyRepository.save(property1);
+//                propertyRepository.save(property1);
 
                 property2.addPropertyRule(smoking);
                 property2.addPropertyRule(party);
-                propertyRepository.save(property2);
+//                propertyRepository.save(property2);
 
                 property3.addPropertyRule(smoking);
-                propertyRepository.save(property3);
+//                propertyRepository.save(property3);
 
                 property3.addPropertyRule(smoking);
-                propertyRepository.save(property4);
+//                propertyRepository.save(property4);
 
                 //  Scenes
 
@@ -312,18 +312,18 @@ public class DataLoader implements ApplicationRunner {
                 sceneRepository.save(forest);
 
                 property1.addScene(city);
-                propertyRepository.save(property1);
+//                propertyRepository.save(property1);
 
                 property2.addScene(nature);
-                propertyRepository.save(property2);
+//                propertyRepository.save(property2);
 
                 property3.addScene(mountain);
                 property3.addScene(sea);
                 property3.addScene(nature);
-                propertyRepository.save(property3);
+//                propertyRepository.save(property3);
 
                 property4.addScene(citySkyline);
-                propertyRepository.save(property4);
+//                propertyRepository.save(property4);
 
                 //  Image urls
 
@@ -390,13 +390,13 @@ public class DataLoader implements ApplicationRunner {
                 property1.setCoverImage(url1.getUrl());
                 propertyRepository.save(property1);
 
-                property2.setCoverImage(url6.getUrl());
+                property2.setCoverImage(url7.getUrl());
                 propertyRepository.save(property2);
 
                 property3.setCoverImage(url10.getUrl());
                 propertyRepository.save(property3);
 
-                property4.setCoverImage(url15.getUrl());
+                property4.setCoverImage(url16.getUrl());
                 propertyRepository.save(property4);
 
                 //  Bookings

@@ -23,8 +23,8 @@ public class Amenity {
     private String title;
 
     @ManyToMany
-//    @JsonBackReference(value = "amenities")
-    @JsonIgnoreProperties({"amenities"})
+    @JsonBackReference(value = "amenities")
+//    @JsonIgnoreProperties({"amenities"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "property_amenities",
