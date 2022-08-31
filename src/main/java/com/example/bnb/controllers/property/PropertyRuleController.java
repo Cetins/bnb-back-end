@@ -13,23 +13,23 @@ public class PropertyRuleController {
     @Autowired
     PropertyRuleRepository propertyRuleRepository;
 
-    @GetMapping("/property-rules")
+    @GetMapping("/public/property-rules")
     public ResponseEntity getAllPropertyRules() {
         return new ResponseEntity<>(propertyRuleRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/property-rules/{id}")
+    @GetMapping("/public/property-rules/{id}")
     public ResponseEntity getPropertyRule(@PathVariable Long id) {
         return new ResponseEntity<>(propertyRuleRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/property-rules")
+    @PostMapping("/public/property-rules")
     public HttpStatus postPropertyRule(@RequestBody PropertyRule propertyRule) {
         propertyRuleRepository.save(propertyRule);
         return (HttpStatus.CREATED);
     }
 
-    @PutMapping("/property-rules/{id}")
+    @PutMapping("/public/property-rules/{id}")
     public PropertyRule updatePropertyRule(@RequestBody PropertyRule newPropertyRule, @PathVariable Long id) {
         return propertyRuleRepository.findById(id)
                 .map(propertyRule -> {
@@ -44,7 +44,7 @@ public class PropertyRuleController {
                 });
     }
 
-    @DeleteMapping("/property-rules/{id}")
+    @DeleteMapping("/public/property-rules/{id}")
     public ResponseEntity<PropertyRule> deletePropertyRule(@PathVariable Long id) {
         propertyRuleRepository.deleteById(id);
         return new ResponseEntity<>(null, HttpStatus.OK);

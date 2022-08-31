@@ -13,23 +13,33 @@ public class ReviewController {
     @Autowired
     ReviewRepository reviewRepository;
 
-    @GetMapping("/reviews")
-    public ResponseEntity getAllReviews() {
+    @GetMapping("/public/reviews")
+    public ResponseEntity<Review> getAllReviewsAndFilters(
+            @RequestParam(required = false, name = "id") Long id,
+            @RequestParam(required = false, name = "guest_id") Long guest_id,
+            @RequestParam(required = false, name = "property_id") Long property_id
+    ) {
+        if (id != null) {
+            return new ResponseEntity(reviewRepository.findById(id), HttpStatus.OK);
+        }
+        if (guest_id != null) {
+            return new ResponseEntity(reviewRepository.findByGuestId(guest_id), HttpStatus.OK);
+        }
+
+        if (property_id != null) {
+            return new ResponseEntity(reviewRepository.findByPropertyId(property_id), HttpStatus.OK);
+        }
+
         return new ResponseEntity(reviewRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/reviews/{id}")
-    public ResponseEntity getReview(@PathVariable Long id) {
-        return new ResponseEntity<>(reviewRepository.findById(id), HttpStatus.OK);
-    }
-
-    @PostMapping("/reviews")
+    @PostMapping("/public/reviews")
     public HttpStatus postReview(@RequestBody Review review) {
         reviewRepository.save(review);
         return (HttpStatus.CREATED);
     }
 
-    @PutMapping("/reviews/{id}")
+    @PutMapping("/public/reviews/{id}")
     Review updateReview(@RequestBody Review newReview, @PathVariable Long id) {
         return reviewRepository.findById(id)
                 .map(review -> {
@@ -45,7 +55,7 @@ public class ReviewController {
                 });
     }
 
-    @DeleteMapping("/reviews/{id}")
+    @DeleteMapping("/public/reviews/{id}")
     public ResponseEntity<Review> deleteReview(@PathVariable Long id) {
         reviewRepository.deleteById(id);
         return new ResponseEntity<>(null, HttpStatus.OK);

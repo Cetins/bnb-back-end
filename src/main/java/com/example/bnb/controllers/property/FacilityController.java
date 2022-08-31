@@ -13,23 +13,23 @@ public class FacilityController {
     @Autowired
     FacilityRepository facilityRepository;
 
-    @GetMapping("/facilities")
+    @GetMapping("/public/facilities")
     public ResponseEntity getAllFacilities() {
         return new ResponseEntity<>(facilityRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/facilities/{id}")
+    @GetMapping("/public/facilities/{id}")
     public ResponseEntity getFacility(@PathVariable Long id) {
         return new ResponseEntity<>(facilityRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/facilities")
+    @PostMapping("/public/facilities")
     public HttpStatus postFacility(@RequestBody Facility facility) {
         facilityRepository.save(facility);
         return (HttpStatus.CREATED);
     }
 
-    @PutMapping("/facilities/{id}")
+    @PutMapping("/public/facilities/{id}")
     public Facility updateFacility(@RequestBody Facility newFacility, @PathVariable Long id) {
         return facilityRepository.findById(id)
                 .map(facility -> {
@@ -45,7 +45,7 @@ public class FacilityController {
                 });
     }
 
-    @DeleteMapping("/facilities/{id}")
+    @DeleteMapping("/public/facilities/{id}")
     public ResponseEntity<Facility> deleteFacility(@PathVariable Long id) {
         facilityRepository.deleteById(id);
         return new ResponseEntity<>(null, HttpStatus.OK);

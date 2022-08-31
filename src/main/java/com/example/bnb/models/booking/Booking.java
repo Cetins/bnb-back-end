@@ -4,6 +4,7 @@ import com.example.bnb.models.guest.Guest;
 import com.example.bnb.models.property.Property;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -16,16 +17,24 @@ public class Booking {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference(value = "bookingGuest")
-//    @JsonIgnoreProperties({"bookings", "id", "password"})
+//    @JsonBackReference(value = "bookingGuest")
+    @JsonIgnoreProperties({"bookings", "reviews"})
     @JoinColumn(name = "guest_id", nullable = false)
     private Guest guest;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Transient
+    private Long guestId;
 
     @ManyToOne
     @JsonBackReference(value = "bookingProperty")
 //    @JsonIgnoreProperties({"bookings", "id", "rate", "imageUrls", "scenes", "facilities", "amenities", "parkingOptions", "propertyRules", "reviews", "active"})
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Transient
+    private Long propertyId;
 
     @Column(name = "date")
     private String date;
@@ -45,6 +54,22 @@ public class Booking {
     }
 
     public Booking() {
+    }
+
+    public Long getGuestId() {
+        return guestId;
+    }
+
+    public void setGuestId(Long guestId) {
+        this.guestId = guestId;
+    }
+
+    public Long getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(Long propertyId) {
+        this.propertyId = propertyId;
     }
 
     public Long getId() {

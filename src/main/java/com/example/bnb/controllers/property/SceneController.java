@@ -13,23 +13,23 @@ public class SceneController {
     @Autowired
     SceneRepository sceneRepository;
 
-    @GetMapping("/scenes")
+    @GetMapping("/public/scenes")
     public ResponseEntity getAllScenes() {
         return new ResponseEntity<>(sceneRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/scenes/{id}")
+    @GetMapping("/public/scenes/{id}")
     public ResponseEntity getScene(@PathVariable Long id) {
         return new ResponseEntity<>(sceneRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/scenes")
+    @PostMapping("/public/scenes")
     public HttpStatus updateScene(@RequestBody Scene scene) {
         sceneRepository.save(scene);
         return (HttpStatus.CREATED);
     }
 
-    @PutMapping("/scenes/{id}")
+    @PutMapping("/public/scenes/{id}")
     public Scene updateScene(@RequestBody Scene newScene, @PathVariable Long id) {
         return sceneRepository.findById(id)
                 .map(scene -> {
@@ -43,7 +43,7 @@ public class SceneController {
                 });
     }
 
-    @DeleteMapping("/scenes/{id}")
+    @DeleteMapping("/public/scenes/{id}")
     public ResponseEntity<Scene> deleteScene(@PathVariable Long id) {
         sceneRepository.deleteById(id);
         return new ResponseEntity<>(null, HttpStatus.OK);
