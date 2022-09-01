@@ -26,7 +26,7 @@ public class BookingController {
     PropertyRepository propertyRepository;
 
     @GetMapping("/public/bookings")
-    public ResponseEntity<List<Booking>>getAllBookings() {
+    public ResponseEntity<List<Booking>> getAllBookings() {
         return new ResponseEntity<>(bookingRepository.findAll(), HttpStatus.OK);
     }
 

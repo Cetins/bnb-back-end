@@ -5,8 +5,12 @@ import com.example.bnb.models.property.Property;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "bookings")
@@ -120,3 +124,5 @@ public class Booking {
         this.people = people;
     }
 }
+
+
