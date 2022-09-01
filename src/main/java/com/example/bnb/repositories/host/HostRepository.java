@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HostRepository extends JpaRepository<Host, Long> {
+    Host findByEmail(String email);
 }

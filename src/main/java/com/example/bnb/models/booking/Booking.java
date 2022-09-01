@@ -4,8 +4,13 @@ import com.example.bnb.models.guest.Guest;
 import com.example.bnb.models.property.Property;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "bookings")
@@ -16,10 +21,14 @@ public class Booking {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference(value = "bookingGuest")
-//    @JsonIgnoreProperties({"bookings", "id", "password"})
+//    @JsonBackReference(value = "bookingGuest")
+    @JsonIgnoreProperties({"bookings", "reviews"})
     @JoinColumn(name = "guest_id", nullable = false)
     private Guest guest;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Transient
+    private Long guestId;
 
     @ManyToOne
     @JsonBackReference(value = "bookingProperty")
@@ -27,20 +36,44 @@ public class Booking {
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Transient
+    private Long propertyId;
+
     @Column(name = "date")
     private String date;
 
     @Column(name = "nights")
     private Integer nights;
 
-    public Booking(Guest guest, Property property, String date, Integer nights) {
+    @Column(name = "people")
+    private Integer people;
+
+    public Booking(Guest guest, Property property, String date, Integer nights, Integer people) {
         this.guest = guest;
         this.property = property;
         this.date = date;
         this.nights = nights;
+        this.people = people;
     }
 
     public Booking() {
+    }
+
+    public Long getGuestId() {
+        return guestId;
+    }
+
+    public void setGuestId(Long guestId) {
+        this.guestId = guestId;
+    }
+
+    public Long getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(Long propertyId) {
+        this.propertyId = propertyId;
     }
 
     public Long getId() {
@@ -82,4 +115,14 @@ public class Booking {
     public void setNights(Integer nights) {
         this.nights = nights;
     }
+
+    public Integer getPeople() {
+        return people;
+    }
+
+    public void setPeople(Integer people) {
+        this.people = people;
+    }
 }
+
+

@@ -3,7 +3,6 @@ package com.example.bnb.controllers.guest;
 import com.example.bnb.models.guest.Guest;
 import com.example.bnb.repositories.guest.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,24 +13,38 @@ public class GuestController {
     @Autowired
     GuestRepository guestRepository;
 
-    @GetMapping("/guests")
-    public ResponseEntity getAllGuests() {
-        return new ResponseEntity<>(guestRepository.findAll(), HttpStatus.OK);
+    @CrossOrigin("*")
+    @GetMapping("/public/guests")
+    public ResponseEntity<Guest> getAllGuestsAndFilters(
+            @RequestParam(required = false, name = "email") String email,
+            @RequestParam(required = false, name = "id") Long id
+    ) {
+        if (id != null) {
+            return new ResponseEntity(guestRepository.findById(id), HttpStatus.OK);
+        }
+
+        if (email != null) {
+            return new ResponseEntity(guestRepository.findByEmail(email), HttpStatus.OK);
+        }
+
+        return new ResponseEntity(guestRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/guests/{id}")
-    public ResponseEntity getGuest(@PathVariable Long id) {
+    @GetMapping(value = "/public/guests/{id}")
+    public ResponseEntity getGuestById(@PathVariable Long id) {
         return new ResponseEntity<>(guestRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/guests")
+    @CrossOrigin("*")
+    @PostMapping(value = "/public/guests")
     public HttpStatus postGuest(@RequestBody Guest guest) {
         guestRepository.save(guest);
         return (HttpStatus.CREATED);
     }
 
-    @PutMapping("/guests/{id}")
-    Guest updateGuest(@RequestBody Guest newGuest, @PathVariable Long id) {
+    @CrossOrigin("*")
+    @PutMapping("/public/guests/{id}")
+    public Guest updateGuest(@RequestBody Guest newGuest, @PathVariable Long id) {
         return guestRepository.findById(id)
                 .map(guest -> {
                     guest.setFirstName(newGuest.getFirstName());
@@ -46,7 +59,8 @@ public class GuestController {
                 });
     }
 
-    @DeleteMapping("/guests/{id}")
+    @CrossOrigin("*")
+    @DeleteMapping("/public/guests/{id}")
     public ResponseEntity<Guest> deleteGuest(@PathVariable Long id) {
         guestRepository.deleteById(id);
         return new ResponseEntity<>(null, HttpStatus.OK);
