@@ -13,23 +13,29 @@ public class HostController {
     @Autowired
     HostRepository hostRepository;
 
-    @GetMapping("/hosts")
-    public ResponseEntity getAllHosts() {
-        return new ResponseEntity<>(hostRepository.findAll(), HttpStatus.OK);
+    @GetMapping("/public/hosts")
+    public ResponseEntity<Host> getAllHostsAndFilters(
+            @RequestParam(required = false, name = "id") Long id,
+            @RequestParam(required = false, name = "email") String email
+    ) {
+        if (id != null) {
+            return new ResponseEntity(hostRepository.findById(id), HttpStatus.OK);
+        }
+
+        if (email != null) {
+            return new ResponseEntity(hostRepository.findByEmail(email), HttpStatus.OK);
+        }
+
+        return new ResponseEntity(hostRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("hosts/{id}")
-    public ResponseEntity getHost(@PathVariable Long id) {
-        return new ResponseEntity<>(hostRepository.findById(id), HttpStatus.OK);
-    }
-
-    @PostMapping("/hosts")
+    @PostMapping("/public/hosts")
     public HttpStatus postHost(@RequestBody Host host) {
         hostRepository.save(host);
         return(HttpStatus.CREATED);
     }
 
-    @PutMapping("/hosts/{id}")
+    @PutMapping("/public/hosts/{id}")
     Host updateHost(@RequestBody Host newHost, @PathVariable Long id) {
         return hostRepository.findById(id)
                 .map(host -> {
@@ -45,7 +51,7 @@ public class HostController {
                 });
     }
 
-    @DeleteMapping("/hosts/{id}")
+    @DeleteMapping("/public/hosts/{id}")
     public ResponseEntity<Host> deleteHost(@PathVariable Long id) {
         hostRepository.deleteById(id);
         return new ResponseEntity<>(null, HttpStatus.OK);

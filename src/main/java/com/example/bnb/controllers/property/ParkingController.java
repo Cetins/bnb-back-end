@@ -13,23 +13,23 @@ public class ParkingController {
     @Autowired
     ParkingRepository parkingRepository;
 
-    @GetMapping("/parking-options")
+    @GetMapping("/public/parking-options")
     public ResponseEntity getAllParkingOptions() {
         return new ResponseEntity<>(parkingRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/parking-options/{id}")
+    @GetMapping("/public/parking-options/{id}")
     public ResponseEntity getParking(@PathVariable Long id) {
         return new ResponseEntity<>(parkingRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/parking-options")
+    @PostMapping("/public/parking-options")
     public HttpStatus postParking(@RequestBody Parking parking) {
         parkingRepository.save(parking);
         return (HttpStatus.CREATED);
     }
 
-    @PutMapping("/parking-options/{id}")
+    @PutMapping("/public/parking-options/{id}")
     public Parking updateParking(@RequestBody Parking newParking, @PathVariable Long id) {
         return parkingRepository.findById(id)
                 .map(parking -> {
@@ -44,7 +44,7 @@ public class ParkingController {
                 });
     }
 
-    @DeleteMapping("/parking-options/{id}")
+    @DeleteMapping("/public/parking-options/{id}")
     public ResponseEntity<Parking> deleteParking(@PathVariable Long id) {
         parkingRepository.deleteById(id);
         return new ResponseEntity<>(null, HttpStatus.OK);

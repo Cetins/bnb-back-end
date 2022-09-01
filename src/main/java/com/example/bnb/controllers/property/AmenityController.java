@@ -13,23 +13,23 @@ public class AmenityController {
     @Autowired
     AmenityRepository amenityRepository;
 
-    @GetMapping("/amenities")
+    @GetMapping("/public/amenities")
     public ResponseEntity getAllAmenities() {
         return new ResponseEntity<>(amenityRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/amenities/{id}")
+    @GetMapping("/public/amenities/{id}")
     public ResponseEntity getAmenity(@PathVariable Long id) {
         return new ResponseEntity<>(amenityRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/amenities")
+    @PostMapping("/public/amenities")
     public HttpStatus postAmenity(@RequestBody Amenity amenity) {
         amenityRepository.save(amenity);
         return (HttpStatus.CREATED);
     }
 
-    @PutMapping("/amenities/{id}")
+    @PutMapping("/public/amenities/{id}")
     public Amenity updateAmenity(@RequestBody Amenity newAmenity, @PathVariable Long id) {
         return amenityRepository.findById(id)
                 .map(amenity -> {
@@ -45,7 +45,7 @@ public class AmenityController {
 
     }
 
-    @DeleteMapping("amenities/{id}")
+    @DeleteMapping("/public/amenities/{id}")
     public ResponseEntity<Amenity> deleteAmenity(@PathVariable Long id) {
         amenityRepository.deleteById(id);
         return new ResponseEntity<>(null, HttpStatus.OK);

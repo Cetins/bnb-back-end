@@ -13,23 +13,23 @@ public class ImageUrlController {
     @Autowired
     ImageUrlRepository imageUrlRepository;
 
-    @GetMapping("/image-urls")
+    @GetMapping("/public/image-urls")
     public ResponseEntity getAllImageUrls() {
         return new ResponseEntity<>(imageUrlRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/image-urls/{id}")
+    @GetMapping("/public/image-urls/{id}")
     public ResponseEntity getImageUrl(@PathVariable Long id) {
         return new ResponseEntity<>(imageUrlRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/image-urls")
+    @PostMapping("/public/image-urls")
     public HttpStatus postImageUrl(@RequestBody ImageUrl imageUrl) {
         imageUrlRepository.save(imageUrl);
         return (HttpStatus.CREATED);
     }
 
-    @PutMapping("/image-urls/{id}")
+    @PutMapping("/public/image-urls/{id}")
     public ImageUrl updateImageUrl(@RequestBody ImageUrl newImageUrl, @PathVariable Long id) {
         return imageUrlRepository.findById(id)
                 .map(imageUrl -> {
@@ -43,7 +43,7 @@ public class ImageUrlController {
                 });
     }
 
-    @DeleteMapping("/image-urls/{id}")
+    @DeleteMapping("/public/image-urls/{id}")
     public ResponseEntity<ImageUrl> deleteImageUrl(@PathVariable Long id) {
         imageUrlRepository.deleteById(id);
         return new ResponseEntity<>(null, HttpStatus.OK);

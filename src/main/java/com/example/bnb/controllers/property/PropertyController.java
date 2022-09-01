@@ -15,23 +15,23 @@ public class PropertyController {
     @Autowired
     PropertyRepository propertyRepository;
 
-    @GetMapping("/properties")
+    @GetMapping("/public/properties")
     public ResponseEntity<List<Property>> getAllProperties() {
         return new ResponseEntity<>(propertyRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/properties/{id}")
+    @GetMapping("/public/properties/{id}")
     public ResponseEntity getProperty(@PathVariable Long id) {
         return new ResponseEntity<>(propertyRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("properties")
+    @PostMapping("/public/properties")
     public HttpStatus postProperty(@RequestBody Property property) {
         propertyRepository.save(property);
         return (HttpStatus.CREATED);
     }
 
-    @PutMapping("properties/{id}")
+    @PutMapping("/public/properties/{id}")
     public Property updateProperty(@RequestBody Property newProperty, @PathVariable Long id) {
         return propertyRepository.findById(id)
                 .map(property -> {
@@ -62,7 +62,7 @@ public class PropertyController {
                 });
     }
 
-    @DeleteMapping("/properties/{id}")
+    @DeleteMapping("/public/properties/{id}")
     public ResponseEntity<Property> deleteProperty(@PathVariable Long id) {
          propertyRepository.deleteById(id);
          return new ResponseEntity<>(null, HttpStatus.OK);
