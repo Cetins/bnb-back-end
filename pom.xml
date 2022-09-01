@@ -61,6 +61,12 @@
 			<artifactId>httpclient</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.as.plugins</groupId>
+			<artifactId>jboss-as-maven-plugin</artifactId>
+			<version>7.9.Final</version>
+			<type>maven-plugin</type>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -68,6 +74,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>3.0.3</version>
 			</plugin>
 		</plugins>
 	</build>
